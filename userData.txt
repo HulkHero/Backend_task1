@@ -1,0 +1,4 @@
+{"name":"hulk","age":"84","email":"me naii btaon ga"}
+{"name":"husdsdlk","age":"64","email":"me naii btaon ga"}
+{"name":"hk","age":"74","email":"me naii btaon ga"}
+{"name":"hsdk","age":"94","email":"me naii btaon ga"}
