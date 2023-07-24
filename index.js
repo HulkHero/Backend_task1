@@ -21,12 +21,12 @@ app.use(express.json())
 
 app.get('/users', async (req, res) => {
 
-    fs.readFile('userData.txt', 'utf8', (err, data) => {
-        console.log(data, "data")
+    fs.readFile('userData.txt', (err, data) => {
         if (err) {
             console.error('Error reading file:', err);
             res.status(500).json({ error: 'Error reading data.' });
         } else {
+            data = data.toString();
             const entries = data.trim().split('\n');
             const fileData = entries.map((entry) => JSON.parse(entry));
             res.status(200).json(fileData);
@@ -73,26 +73,29 @@ app.put('/update/:name', (req, res) => {
                 res.status(500).json({ error: 'Error reading data.' });
                 return;
             } else {
+                data = data.toString();
                 const entries = data.trim().split('\n');
-                const fileData = entries.map((entry) => JSON.parse(entry));
-                const dataIndex = fileData.findIndex((data) => data.name == name);
-
-                if (dataIndex === -1) {
+                const fileJsonData = entries.map((entry) => JSON.parse(entry));
+                const findIndex = fileJsonData.findIndex((data) => data.name == name);
+                if (findIndex === -1) {
                     res.status(500).send({ message: 'User not found.' })
                     return;
-                } else {
-                    fileData[dataIndex].age = age
-                    fileData[dataIndex].email = email;
-                    const updatedJsonData = fileData.map((entry) => JSON.stringify(entry) + '\n').join('');
-                    fs.writeFile('userdata.txt', updatedJsonData, (err) => {
-                        if (err) {
-                            res.status(500).json({ message: 'Error updating data.' });
-                            return;
-                        } else {
-                            res.status(200).json({ message: 'Data updated.' });
-                        }
-                    });
                 }
+                const updatedData = fileJsonData.map((entry) => {
+                    if (entry.name == name) {
+                        return { ...entry, age: age, email: email }
+                    }
+                    return entry
+                })
+                const updatedStringData = updatedData.map((entry) => JSON.stringify(entry) + '\n').join('');
+                fs.writeFile('userdata.txt', updatedStringData, (err) => {
+                    if (err) {
+                        res.status(500).json({ message: 'Error updating data.' });
+                        return;
+                    } else {
+                        res.status(200).json({ message: 'Data updated.' });
+                    }
+                });
             }
         });
     }

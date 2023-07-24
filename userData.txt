@@ -1,4 +1,4 @@
-{"name":"hulk","age":"84","email":"me naii btaon ga"}
-{"name":"husdsdlk","age":"64","email":"me naii btaon ga"}
-{"name":"hk","age":"74","email":"me naii btaon ga"}
-{"name":"hsdk","age":"94","email":"me naii btaon ga"}
+{"name":"hulk","age":"788","email":"hulksmash"}
+{"name":"husdsdlk","age":"64","email":"idk"}
+{"name":"hk","age":"74","email":"sd@gmail.com"}
+{"name":"hsdk","age":"94","email":"hi@gmail.com"}
