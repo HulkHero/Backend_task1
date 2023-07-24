@@ -43,7 +43,7 @@ app.post('/create', (req, res) => {
             throw 'Please enter name, age and email to create user'
         }
         console.log(user, "user");
-        fs.appendFile('userData.txt', JSON.stringify(user) + '\n', "utf-8", function (err) {
+        fs.appendFile('userData.txt', JSON.stringify(user) + '\n', function (err) {
             if (err) {
                 res.status(500).json({ error: 'Error writing data.' });
                 return;
@@ -68,7 +68,7 @@ app.put('/update/:name', (req, res) => {
         if (!age || !email || !name) {
             throw 'Please enter name, age and email to update user'
         }
-        fs.readFile('userdata.txt', 'utf8', (err, data) => {
+        fs.readFile('userdata.txt', (err, data) => {
             if (err) {
                 res.status(500).json({ error: 'Error reading data.' });
                 return;
@@ -84,7 +84,7 @@ app.put('/update/:name', (req, res) => {
                     fileData[dataIndex].age = age
                     fileData[dataIndex].email = email;
                     const updatedJsonData = fileData.map((entry) => JSON.stringify(entry) + '\n').join('');
-                    fs.writeFile('userdata.txt', updatedJsonData, 'utf8', (err) => {
+                    fs.writeFile('userdata.txt', updatedJsonData, (err) => {
                         if (err) {
                             res.status(500).json({ message: 'Error updating data.' });
                             return;
