@@ -1,3 +1,16 @@
+// "/"->renders all users list using ejs
+// "/users"  -> returns users data from file
+// "/create" -> creates a new user in file
+// "/update/:name" -> updates user data in file specified by name
+
+/* data Format
+ data={
+     name,
+     age,
+     email
+ }
+     */
+
 const express = require('express');
 const fs = require('fs');
 const ejs = require('ejs');
@@ -10,17 +23,6 @@ app.use(express.json())
 
 app.set('view engine', 'ejs');
 
-// "/users"  -> returns users data from file
-// "/create" -> creates a new user in file
-// "/update/:name" -> updates user data in file specified by name
-
-/* data Format
- data={
-     name,
-     age,
-     email
- }
-     */
 
 
 
