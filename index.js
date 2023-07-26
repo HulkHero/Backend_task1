@@ -1,9 +1,14 @@
 const express = require('express');
 const fs = require('fs');
+const ejs = require('ejs');
 const app = express();
+
+
+
 
 app.use(express.json())
 
+app.set('view engine', 'ejs');
 
 // "/users"  -> returns users data from file
 // "/create" -> creates a new user in file
@@ -16,6 +21,8 @@ app.use(express.json())
      email
  }
      */
+
+
 
 
 
@@ -55,9 +62,21 @@ app.post('/create', (req, res) => {
         console.log(err)
         res.status(400).json({ err })
     }
-
-
 })
+
+app.get('/', async (req, res) => {
+    fs.readFile('userData.txt', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            res.status(500).json({ error: 'Error reading data.' });
+        } else {
+            data = data.toString();
+            const entries = data.trim().split('\n');
+            const users = entries.map((entry) => JSON.parse(entry));
+            res.render('users', { users });
+        }
+    });
+});
 
 //enter name in params
 // enter age and email in body to change

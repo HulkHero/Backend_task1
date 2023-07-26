@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Users</title>
+  </head>
+  <body>
+    <h1 style="text-align: center">All Users</h1>
+
+    <table
+      style="
+        margin-left: auto;
+        margin-right: auto;
+        border-collapse: collapse;
+        width: 80%;
+        max-width: 800px;
+      "
+    >
+      <thead>
+        <tr>
+          <th
+            style="padding: 10px; background-color: #f0f0f0; text-align: left"
+          >
+            Name
+          </th>
+          <th
+            style="padding: 10px; background-color: #f0f0f0; text-align: left"
+          >
+            Age
+          </th>
+          <th
+            style="padding: 10px; background-color: #f0f0f0; text-align: left"
+          >
+            Email
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(user => { %>
+        <tr>
+          <td style="padding: 10px; border: 1px solid #ccc">
+            <%= user.name %>
+          </td>
+          <td style="padding: 10px; border: 1px solid #ccc"><%= user.age %></td>
+          <td style="padding: 10px; border: 1px solid #ccc">
+            <%= user.email %>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>
